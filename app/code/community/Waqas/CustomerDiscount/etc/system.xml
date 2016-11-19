@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <waqas translate="label" module="customerdiscount">
+            <label>Auto Customer Discount</label>
+            <sort_order>100</sort_order>
+        </waqas>
+    </tabs>
+    <sections>
+        <waqas translate="label" module="customerdiscount">
+            <label>Customer Discount Options</label>
+            <tab>waqas</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+ 
+            <groups>
+                <ext_setting_group translate="label" module="customerdiscount">
+                    <label>Auto Discont Extension Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+ 
+                    <fields>                       
+                        <discount_input translate="label">
+                            <label>Discount Amount: </label>
+                            <comment>Enter auto discount in % (i.e 10) 1-100</comment>
+                            <validate>validate-digits validate-digits-range digits-range-01-100</validate>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </discount_input>
+                        <purchased_input translate="label">
+                            <label>Customer lifetime shopping is greater than: </label>
+                            <comment>Amount in store base-currency(i.e USD) based on this discount will be applied </comment>
+                             <validate>validate-digits</validate>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </purchased_input>
+
+                        <shipping_select translate="label">
+                            <label>Enable/Disable discount on shipping: </label>
+                            <comment> Select Yes/No to enable/disable Discount on Shipping</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </shipping_select>
+
+                        
+
+                    </fields>
+                </ext_setting_group>
+                
+                <ext_config_grouop>
+                    <label>Stop/Start Promotion Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1003</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+
+                    <fields> 
+                        <ext_select translate="label">
+                            <label>Enable/Disable discount promotion: </label>
+                            <comment> Select Yes/No to enable/disable promotion</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>51</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </ext_select>
+
+                        <check translate="label">
+                        <label>Stop Promotion and delete all created discounts</label>
+                        <frontend_type>button</frontend_type>                        
+                        <frontend_model>customerdiscount/adminhtml_system_config_form_button</frontend_model>
+                        <sort_order>99</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        </check>
+                    </fields>     
+                </ext_config_grouop>
+            </groups>
+        </waqas>
+    </sections>
+</config>

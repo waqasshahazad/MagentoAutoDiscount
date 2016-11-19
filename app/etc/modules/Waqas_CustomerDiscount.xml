@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Waqas_CustomerDiscount>
+      <active>true</active>
+      <codePool>community</codePool>
+      <version>0.1.1</version>
+    </Waqas_CustomerDiscount>
+  </modules>
+</config>

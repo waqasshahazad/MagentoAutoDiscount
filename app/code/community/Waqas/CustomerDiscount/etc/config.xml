@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Waqas_CustomerDiscount>
+      <version>0.1.1</version>
+    </Waqas_CustomerDiscount>
+  </modules>
+
+  <global>
+    
+
+    <blocks>
+     <customerdiscount>
+         <class>Waqas_CustomerDiscount_Block</class>
+     </customerdiscount>                         
+    </blocks>
+
+    <helpers>
+      <customerdiscount>
+        <class>Waqas_CustomerDiscount_Helper</class>
+      </customerdiscount>
+    </helpers>
+	<models>
+	  <customerdiscount>
+		<class>Waqas_CustomerDiscount_Model</class>
+		<resourceModel>customerdiscount_mysql4</resourceModel>
+	  </customerdiscount>
+
+    <salesrule>
+       <rewrite>
+              <validator>Waqas_CustomerDiscount_Model_Validator</validator>
+      </rewrite>
+    </salesrule>
+	</models>
+    <events>	  
+    <sales_quote_collect_totals_after> <!-- identifier of the event we want to catch -->
+        <observers>
+          <sales_quote_collect_totals_after_handler> <!-- identifier of the event handler -->
+            <type>singleton</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>customerdiscount/observer</class> <!-- observers class alias -->
+            <method>CustomerAutoDiscount</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </sales_quote_collect_totals_after_handler>
+        </observers>
+      </sales_quote_collect_totals_after>	 
+
+      <checkout_submit_all_after> <!-- identifier of the event we want to catch -->
+        <observers>
+          <checkout_submit_all_after_handler> <!-- identifier of the event handler -->
+            <type>singleton</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>customerdiscount/observer</class> <!-- observers class alias -->
+            <method>removeAppliedDiscoutRule</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </checkout_submit_all_after_handler>
+        </observers>
+      </checkout_submit_all_after>  
+
+    </events>
+
+       <resources>
+            
+            <customerdiscount_setup>
+            <setup>
+                <module>Waqas_CustomerDiscount</module>
+                <class>Mage_Sales_Model_Resource_Setup</class>
+            </setup>
+            <connection>
+                <use>core_setup</use>
+            </connection>
+        </customerdiscount_setup>        
+
+        </resources>
+
+  </global>
+
+  <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <customerdiscount after="Mage_Adminhtml">Waqas_CustomerDiscount</customerdiscount>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+  <adminhtml>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <waqas>
+                                        <title>Customer Discount - All</title>
+                                    </waqas>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</adminhtml>
+
+<default>
+  <!-- Default values for extension settings -->
+    <waqas>
+        <ext_setting_group> 
+             <discount_input>10</discount_input> 
+             <purchased_input>10000</purchased_input> 
+             <shipping_select>1</shipping_select> 
+
+        </ext_setting_group>  
+
+        <ext_config_grouop>
+            <ext_select>0</ext_select> 
+        </ext_config_grouop>    
+
+    </waqas>
+    <!-- Default values for extension settings -->
+</default>
+</config> 
